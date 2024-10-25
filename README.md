@@ -28,6 +28,14 @@
      ```sh
      terraform init
      ```
+   - Validate the Terraform configuration:
+     ```sh
+     terraform validate
+     ```
+   - Format the Terraform configuration:
+     ```sh
+     terraform fmt
+     ```
    - Apply the Terraform configuration:
      ```sh
      terraform apply
@@ -41,6 +49,10 @@
    - Run the Ansible playbook:
      ```sh
      ansible-playbook playbook.yml
+     ```
+   - Run Ansible lint checks:
+     ```sh
+     ansible-lint playbook.yml
      ```
 
 4. **Run Automated Tests:**
@@ -64,5 +76,16 @@
 
 2. **Automated Testing Stage:**
    - Runs unit tests and integration tests to ensure code quality.
+
+#### Configuring Firewall Rules, Monitoring, and SSL Certificates
+
+1. **Firewall Rules:**
+   - The Ansible playbook includes tasks to configure firewall rules using `ufw` to allow traffic on ports 80 and 443.
+
+2. **Monitoring:**
+   - The Ansible playbook includes tasks to set up monitoring using `prometheus` and `grafana`.
+
+3. **SSL Certificates:**
+   - The Ansible playbook includes tasks to configure SSL certificates using `certbot` to obtain and install certificates for your domain.
 
 For more detailed information, refer to the respective directories and their documentation.

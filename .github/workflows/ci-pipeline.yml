@@ -24,6 +24,14 @@ jobs:
         run: terraform init
         working-directory: ./terraform
 
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: ./terraform
+
+      - name: Terraform Format
+        run: terraform fmt -check
+        working-directory: ./terraform
+
       - name: Terraform Apply
         run: terraform apply -auto-approve
         working-directory: ./terraform
@@ -32,6 +40,9 @@ jobs:
         uses: dawidd6/action-ansible-playbook@v2
         with:
           playbook: ./ansible/playbook.yml
+
+      - name: Run Ansible Lint
+        run: ansible-lint ./ansible/playbook.yml
 
   test:
     runs-on: ubuntu-latest
