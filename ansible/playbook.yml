@@ -1,0 +1,39 @@
+- name: Configure Infrastructure
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install necessary packages
+      apt:
+        name:
+          - nginx
+          - python3
+          - python3-pip
+        state: present
+
+    - name: Start and enable nginx
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Deploy application code
+      copy:
+        src: /path/to/application/code
+        dest: /var/www/html/
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: Install Python dependencies
+      pip:
+        requirements: /path/to/requirements.txt
+
+    - name: Run database migrations
+      command: python3 manage.py migrate
+      args:
+        chdir: /path/to/application/code
+
+    - name: Collect static files
+      command: python3 manage.py collectstatic --noinput
+      args:
+        chdir: /path/to/application/code
