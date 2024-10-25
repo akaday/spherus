@@ -37,3 +37,27 @@
       command: python3 manage.py collectstatic --noinput
       args:
         chdir: /path/to/application/code
+
+    - name: Configure firewall rules
+      ufw:
+        rule: allow
+        port: '80,443'
+        proto: tcp
+
+    - name: Set up monitoring with Prometheus
+      apt:
+        name: prometheus
+        state: present
+
+    - name: Set up monitoring with Grafana
+      apt:
+        name: grafana
+        state: present
+
+    - name: Configure SSL certificates
+      apt:
+        name: certbot
+        state: present
+
+    - name: Obtain SSL certificate
+      command: certbot --nginx -d yourdomain.com
